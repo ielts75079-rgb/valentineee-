@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rose Day Fun 🌹</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #fff1f5, #ffd6de);
+      font-family: Georgia, serif;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #c9184a;
+      font-size: 42px;
+      margin-top: 40px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #444;
+      width: 80%;
+      margin: 10px auto 30px;
+    }
+
+    /* Falling roses */
+    .rose {
+      position: fixed;
+      font-size: 28px;
+      cursor: pointer;
+      animation: fall 6s linear infinite;
+      color: #c9184a;
+    }
+
+    @keyframes fall {
+      from { top: -10%; opacity: 1; }
+      to { top: 110%; opacity: 0; }
+    }
+
+    /* Boy animation (simple circle & rectangle) */
+    .boy {
+      position: absolute;
+      bottom: 20px;
+      left: -60px;
+      width: 50px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: walk 5s forwards;
+    }
+
+    .head {
+      width: 20px;
+      height: 20px;
+      background: #333;
+      border-radius: 50%;
+    }
+
+    .body {
+      width: 4px;
+      height: 50px;
+      background: #333;
+      margin-top: 2px;
+      position: relative;
+    }
+
+    .rose-hand {
+      position: relative;
+      top: 0;
+      font-size: 24px;
+    }
+
+    @keyframes walk {
+      0% { left: -60px; }
+      100% { left: 45%; }
+    }
+
+    .proposal {
+      font-size: 28px;
+      color: #c9184a;
+      display: none;
+      margin-top: 20px;
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Happy Rose Day 🌹</h1>
+<p>Catch the falling roses and enjoy a little surprise!</p>
+
+<div class="boy" id="boy">
+  <div class="head"></div>
+  <div class="body"></div>
+  <div class="rose-hand">🌹</div>
+</div>
+
+<div class="proposal" id="proposal">Will you be my Valentine? ❤️</div>
+
+<script>
+  // Falling roses
+  const messages = [
+    "You just caught my heart ❤️",
+    "Rose for the prettiest 🌹",
+    "You made me smile 😄",
+    "Keep it up, love! 💕",
+    "Yay! You’re amazing 😍"
+  ];
+
+  setInterval(() => {
+    const rose = document.createElement("div");
+    rose.className = "rose";
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 90 + "vw";
+
+    rose.onclick = () => {
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      alert(msg);
+      rose.remove();
+    }
+
+    document.body.appendChild(rose);
+    setTimeout(() => rose.remove(), 6000);
+  }, 700);
+
+  // Show proposal text after boy finishes walking
+  const boy = document.getElementById('boy');
+  boy.addEventListener('animationend', () => {
+    document.getElementById('proposal').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
